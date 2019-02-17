@@ -26,7 +26,7 @@ npm i --save-dev @types/config @types/raven
 
 ## Configurations
 There are several configurations that we use throughout our projects. Some of them are required by this package. Here is what you should add into the default config file (https://www.npmjs.com/package/config)
-
+<!-- TODO: Put other configs in here -->
 ```
 raven:
     dsn: 'htttps://logger.sentry.io/31'
