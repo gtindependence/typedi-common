@@ -1,28 +1,27 @@
 import * as EmailTemplate from 'email-templates';
 import { Container } from 'typedi';
+import { EmailOptions } from '../interfaces';
 import { EmailConfig } from '../interfaces/email-config.interface';
 import { ErrorHandler } from '../services/error-handler.service';
 
 export class Email extends EmailTemplate {
     errorHandler: ErrorHandler;
 
-    // TODO: this EmailConfig interface should come from the package...
     constructor(options: EmailConfig) {
         super(options);
 
         this.errorHandler = Container.get(ErrorHandler);
     }
 
-    // TODO: get the type for this param
     /**
      *
-     * @param mailData
+     * @param mailData EmailOptions
      *
      * This function wraps the standard email-templates send function.
      * It returns true or false to indicate if the email was sent successfully
      * and will also log to the error handler.
      */
-    async send(mailData: any) {
+    async send(mailData: EmailOptions, handleErrors = true) {
         try {
             const response = await super.send(mailData);
 
@@ -32,6 +31,10 @@ export class Email extends EmailTemplate {
             return false;
         }
         catch (error) {
+            if (!handleErrors) {
+                throw error;
+            }
+
             this.errorHandler.captureException(error);
             return false;
         }

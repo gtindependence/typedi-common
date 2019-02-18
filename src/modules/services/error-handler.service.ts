@@ -14,6 +14,8 @@ export class ErrorHandler {
         @LoggerProvider() private readonly logger: log.Logger
     ) {
         try {
+            // tslint:disable-next-line:no-console
+            console.warn('You need to create a config for raven. See the README in @teamhive/typedi-common');
             this.dsn = config.get<string>('raven.dsn') || null;
 
             this.config = {

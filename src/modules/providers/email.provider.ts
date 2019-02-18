@@ -7,11 +7,14 @@ import { Email } from '../classes/email';
 export function EmailProvider() {
     return (object: any, propertyName: string, index?: number) => {
 
+        // tslint:disable-next-line:no-console
+        console.warn('You need to create a config for email. See the README in @teamhive/typedi-common');
+
         const email = new Email({
             message: {
                 from: config.get<string>('email.noReplyEmailAddress')
             },
-            send: config.get('email.send') as boolean,
+            send: config.get<boolean>('email.send'),
             transport: nodemailerSendgrid({
                 apiKey: config.get<string>('email.sendgrid.apiKey')
             }),
