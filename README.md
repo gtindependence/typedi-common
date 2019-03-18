@@ -28,50 +28,9 @@ raven:
 
 logger:
     level: 'debug'
-
-email:
-    noReplyEmailAddress: 'dev@meetmaestro.com'
-    sendTo: ['placeholder@placeholder.com']
-    send: true
-    sendgrid:
-        apiKey: 'PLACEHOLDER'
-```
-
-### Email Templates
-In addtion to the email configuration above, you will need to have your email templates and resources in an `emails` folder at the root level of your project. The `emails` folder should have all template folders inside of it as well as a `shared` folder. The `shared` folder is where email-templates will look for any css files or assets that your email templates reference. Each template folder should have an `html.pug` file for the body of the email and a `subject.pug` file for the subject.
-```
-.
-+-- emails
-|   +-- sample-template
-|   |   +-- html.pug
-|   |   +-- subject.pug
-|   +-- shared
-|   |   +-- css
-|   |   |   +-- main.css
-|   |   +-- images
-|   |   |   +-- sample.jpg
 ```
 
 ## Available Modules
-
-### Providers
-There are a few different providers that we have made available:
-#### EmailProvider
-The email provider is configured based off of your projects `email` configuration object. You can inject it into your email service and then using it is as simple as the example below. The `send` method will return a boolean indicating if the email was successfully sent and automatically will have it's errors handled by the `ErrorHandler` service. If you want to handle any thrown error at the project level, the second parameter of the `send` method is a boolean `handleErrors` that can be set to `false`.
-
-```
-async sendExampleEmail(user: User) {
-        return await this.email.send({
-            message: {
-                to: user.email
-            },
-            template: 'sample-template',
-            locals: {
-                // variables to pass into email
-            }
-        });
-    }
-```
 
 ### Services
 There are a few different services that we have made avaialable:
