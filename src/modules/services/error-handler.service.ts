@@ -14,24 +14,29 @@ export class ErrorHandler {
     constructor(
         @LoggerProvider() private readonly logger: log.Logger
     ) {
+        this.config = {
+            environment: process.env.NODE_ENV,
+            release: process.env.npm_package_version,
+            autoBreadcrumbs: true,
+            captureUnhandledRejections: true
+        };
+
         try {
+            this.dsn = config.get<string>('raven.dsn');
+        }
+        catch {
             // tslint:disable-next-line:no-console
             console.warn('You need to create a config for raven. See the README in @teamhive/typedi-common');
-            this.dsn = config.get<string>('raven.dsn') || null;
+            this.dsn = null;
+        }
 
-            this.config = {
-                environment: process.env.NODE_ENV,
-                release: process.env.npm_package_version,
-                autoBreadcrumbs: true,
-                captureUnhandledRejections: true
-            };
-
-            if (this.dsn) {
+        if (this.dsn) {
+            try {
                 Raven.config(this.dsn, this.config).install();
             }
-        }
-        catch (error) {
-            this.logger.error(error);
+            catch (error) {
+                this.logger.error(error);
+            }
         }
     }
 

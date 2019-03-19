@@ -4,11 +4,18 @@ import { Container } from 'typedi';
 
 export function LoggerProvider() {
     return (object: any, propertyName: string, index?: number) => {
-        const logger = log.getLogger();
+        let level: string;
+        try {
+            level = config.get('logger.level');
+        }
+        catch {
+            // tslint:disable-next-line:no-console
+            console.warn('You need to create a config for logger.level. See the README in @teamhive/typedi-common');
+            level = 'debug';
+        }
 
-        // tslint:disable-next-line:no-console
-        console.warn('You need to create a config for logger. See the README in @teamhive/typedi-common');
-        logger.level = config.get('logger.level');
+        const logger = log.getLogger();
+        logger.level = level;
 
         Container.registerHandler({ object, propertyName, index, value: _containerInstance => logger });
     };
