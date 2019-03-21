@@ -59,13 +59,13 @@ export class ErrorHandler {
                 Raven.captureException(error, (e: any) => {
                     if (e) {
                         this.logger.error(e);
-                        resolve();
                     }
                     resolve();
                 });
             }
             else {
                 this.logger.error(error);
+                resolve();
             }
         });
     }
