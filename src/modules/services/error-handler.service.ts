@@ -4,10 +4,9 @@ import { Service } from 'typedi';
 import { LoggerService } from './logger.service';
 import { RAVEN_DISPLAY_LIMIT } from '../constants';
 import { Breadcrum } from '../interfaces/breadcrum.interface';
-import { ErrorHandlerInterface } from '../interfaces/error-handler.interface';
 
 @Service()
-export class ErrorHandler implements ErrorHandlerInterface {
+export class ErrorHandler {
     config: Raven.ConstructorOptions;
     dsn: string;
 
