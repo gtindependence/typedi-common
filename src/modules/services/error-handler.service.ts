@@ -1,18 +1,18 @@
 import * as config from 'config';
-import * as log from 'log4js';
 import * as Raven from 'raven';
 import { Service } from 'typedi';
+import { LoggerService } from './logger.service';
 import { RAVEN_DISPLAY_LIMIT } from '../constants';
 import { Breadcrum } from '../interfaces/breadcrum.interface';
-import { LoggerProvider } from '../providers/logger.provider';
+import { ErrorHandlerInterface } from '../interfaces/error-handler.interface';
 
 @Service()
-export class ErrorHandler {
+export class ErrorHandler implements ErrorHandlerInterface {
     config: Raven.ConstructorOptions;
     dsn: string;
 
     constructor(
-        @LoggerProvider() private readonly logger: log.Logger
+        private readonly logger: LoggerService
     ) {
         this.config = {
             environment: process.env.NODE_ENV,

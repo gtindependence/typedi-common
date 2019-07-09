@@ -1,9 +1,12 @@
 import * as config from 'config';
 import * as log from 'log4js';
-import { Container } from 'typedi';
+import { Service } from 'typedi';
 
-export function LoggerProvider() {
-    return (object: any, propertyName: string, index?: number) => {
+@Service()
+export class LoggerService {
+    logger: log.Logger;
+
+    constructor() {
         let level: string;
         try {
             level = config.get('logger.level');
@@ -14,9 +17,16 @@ export function LoggerProvider() {
             level = 'debug';
         }
 
-        const logger = log.getLogger();
-        logger.level = level;
+        this.logger = log.getLogger();
+        this.logger.level = level;
+    }
 
-        Container.registerHandler({ object, propertyName, index, value: _containerInstance => logger });
-    };
+    info(message: any, ...args: any[]) {
+        this.logger.info(message, ...args);
+    }
+
+    error(message: any, ...args: any[]) {
+        this.logger.error(message, ...args);
+    }
+
 }
