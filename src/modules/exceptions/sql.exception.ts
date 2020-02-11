@@ -4,7 +4,7 @@ import { SequelizeError } from '../interfaces';
 export class SqlException extends BaseException {
     message: string;
     stack: string;
-    original: any;
+    error: any;
 
     constructor(error: SequelizeError) {
         super();
@@ -12,7 +12,7 @@ export class SqlException extends BaseException {
         if (error) {
             this.message = error.message;
             this.stack = error.stack;
-            this.original = error.original;
+            this.error = error;
         }
     }
 }
