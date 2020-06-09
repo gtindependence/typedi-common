@@ -44,7 +44,7 @@ export class ErrorHandler {
             Raven.captureBreadcrumb(breadcrumb);
         }
         else {
-            this.logger.info(breadcrumb.message, breadcrumb.data);
+            this.logger.info(breadcrumb.message, breadcrumb.data ? breadcrumb.data : '');
         }
     }
 
