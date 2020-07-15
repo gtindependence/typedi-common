@@ -1,6 +1,6 @@
 {
     "name": "@teamhive/typedi-common",
-    "version": "2.1.3",
+    "version": "3.0.0",
     "description": "Our common services, providers, etc for TypeDI projects",
     "keywords": [
         "Typescript",
