@@ -36,7 +36,7 @@
         "@types/raven": "^2.5",
         "config": "^3.1",
         "js-yaml": "^3.13",
-        "log4js": "^4.0",
+        "log4js": "^6.2",
         "raven": "^2.6",
         "reflect-metadata": "~0.1.13",
         "typedi": "^0.8"
@@ -47,7 +47,7 @@
         "@types/raven": "^2.5",
         "config": "^3.1",
         "js-yaml": "^3.13",
-        "log4js": "^3.0",
+        "log4js": "^6.2",
         "raven": "^2.6",
         "reflect-metadata": "~0.1.13",
         "tslint": "^5.18",
