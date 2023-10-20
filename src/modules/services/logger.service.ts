@@ -9,11 +9,11 @@ export class LoggerService {
         this.logger = log.getLogger();
     }
 
-    info(message: any, ...args: any[]) {
+    info(message: any, ...args: unknown[]) {
         this.logger.info(message, ...args);
     }
 
-    error(message: any, ...args: any[]) {
+    error(message: any, ...args: unknown[]) {
         this.logger.error(message, ...args);
     }
 }
