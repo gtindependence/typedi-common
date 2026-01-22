@@ -1,5 +1,5 @@
 {
-    "name": "@teamhive/typedi-common",
+    "name": "@gtindependence/typedi-common",
     "version": "3.0.0",
     "description": "Our common services, providers, etc for TypeDI projects",
     "keywords": [
@@ -9,7 +9,7 @@
     ],
     "main": "index.js",
     "typings": "index.d.ts",
-    "author": "TeamHive",
+    "author": "TeamHive, GTIndependence",
     "contributors": [
         "John Pinkster <jpinkster>",
         "Tyler Vander Maas <tvmaasjazz>"
@@ -35,7 +35,7 @@
     "peerDependencies": {
         "@types/config": "^3.3.2",
         "config": "^3.3.9",
-        "js-yaml": "^4.1.0",
+        "js-yaml": "4.1.1",
         "log4js": "^6.9.1",
         "@sentry/node": "^7.74.1",
         "reflect-metadata": "~0.1.13",
@@ -45,14 +45,14 @@
         "@sentry/node": "^7.74.1",
         "@types/config": "^3.3.2",
         "@types/node": "18.17.1",
-        "@typescript-eslint/eslint-plugin": "^6.8.0",
-        "@typescript-eslint/parser": "^6.8.0",
+        "@typescript-eslint/eslint-plugin": "^8.53.1",
+        "@typescript-eslint/parser": "^8.53.1",
         "config": "^3.3.9",
-        "eslint": "^8.52.0",
-        "eslint-plugin-import": "^2.28.1",
-        "eslint-plugin-jsdoc": "^46.8.2",
+        "eslint": "^9.39.2",
+        "eslint-plugin-import": "^2.32.0",
+        "eslint-plugin-jsdoc": "^49.0.0",
         "eslint-plugin-prefer-arrow": "^1.2.3",
-        "js-yaml": "^4.1.0",
+        "js-yaml": "4.1.1",
         "log4js": "^6.9.1",
         "reflect-metadata": "~0.1.13",
         "typedi": "^0.10.0",
