@@ -1,13 +1,13 @@
 import * as config from 'config';
-import * as Raven from 'raven';
 import { Service } from 'typedi';
 import { LoggerService } from './logger.service';
 import { RAVEN_DISPLAY_LIMIT } from '../constants';
-import { Breadcrum } from '../interfaces/breadcrum.interface';
+import { Breadcrum } from '../interfaces';
+import * as Sentry from '@sentry/node';
 
 @Service()
 export class ErrorHandler {
-    config: Raven.ConstructorOptions;
+    config: Sentry.NodeOptions;
     dsn: string;
 
     constructor(
@@ -16,22 +16,21 @@ export class ErrorHandler {
         this.config = {
             environment: process.env.NODE_ENV,
             release: process.env.npm_package_version,
-            autoBreadcrumbs: true,
-            captureUnhandledRejections: true
+            dsn: null
         };
 
         try {
-            this.dsn = config.get<string>('raven.dsn');
+            this.config.dsn = config.get<string>('sentry.dsn');
         }
         catch {
-            // tslint:disable-next-line:no-console
-            console.warn('You need to create a config for raven. See the README in @teamhive/typedi-common');
-            this.dsn = null;
+            // eslint-disable-next-line no-console
+            console.warn('You need to create a config for sentry. See the README in @gtindependence/typedi-common');
+            this.config.dsn = null;
         }
 
-        if (this.dsn) {
+        if (this.config.dsn) {
             try {
-                Raven.config(this.dsn, this.config).install();
+                Sentry.init(this.config)
             }
             catch (error) {
                 this.logger.error(error);
@@ -41,7 +40,7 @@ export class ErrorHandler {
 
     captureBreadcrumb(breadcrumb: Breadcrum) {
         if (process.env.DEPLOYMENT) {
-            Raven.captureBreadcrumb(breadcrumb);
+            Sentry.addBreadcrumb(breadcrumb);
         }
         else {
             this.logger.info(breadcrumb.message, breadcrumb.data ? breadcrumb.data : '');
@@ -49,18 +48,14 @@ export class ErrorHandler {
     }
 
     captureException(error: Error) {
-        return new Promise((resolve) => {
+        return new Promise<void>((resolve) => {
             if (process.env.DEPLOYMENT) {
                 if (this.sizeInBites(error) > RAVEN_DISPLAY_LIMIT) {
                     this.captureMessage(`Error with message "${error.message}" is too large and will not have all data displayed.`);
                 }
 
-                Raven.captureException(error, (e: any) => {
-                    if (e) {
-                        this.logger.error(e);
-                    }
-                    resolve();
-                });
+                Sentry.captureException(error);
+                resolve();
             }
             else {
                 this.logger.error(error);
@@ -71,18 +66,14 @@ export class ErrorHandler {
 
     captureMessage(message: string) {
         if (process.env.DEPLOYMENT) {
-            Raven.captureMessage(message, (e: any) => {
-                if (e) {
-                    this.logger.error(e);
-                }
-            });
+            Sentry.captureMessage(message);
         }
         else {
             this.logger.info(message);
         }
     }
 
-    private sizeInBites(object: any) {
+    private sizeInBites(object: unknown) {
         const objectList = [];
         const stack = [object];
         let bytes = 0;

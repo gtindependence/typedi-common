@@ -1,5 +1,5 @@
 {
-    "name": "@teamhive/typedi-common",
+    "name": "@gtindependence/typedi-common",
     "version": "3.0.0",
     "description": "Our common services, providers, etc for TypeDI projects",
     "keywords": [
@@ -9,7 +9,7 @@
     ],
     "main": "index.js",
     "typings": "index.d.ts",
-    "author": "TeamHive",
+    "author": "TeamHive, GTIndependence",
     "contributors": [
         "John Pinkster <jpinkster>",
         "Tyler Vander Maas <tvmaasjazz>"
@@ -29,32 +29,34 @@
         "start": "tsc",
         "prepack": "tsc",
         "postpublish": "git push && git push --tags",
-        "postpack": "rm *.d.ts && rm *.js && rm -Rf modules"
+        "postpack": "rm *.d.ts && rm *.js && rm -Rf modules",
+        "lint": "eslint -c .eslintrc.js --ext .ts src/*"
     },
     "peerDependencies": {
-        "@types/config": "^0.0",
-        "@types/raven": "^2.5",
-        "config": "^3.1",
-        "js-yaml": "^3.13",
-        "log4js": "^6.2",
-        "raven": "^2.6",
+        "@types/config": "^3.3.2",
+        "config": "^3.3.9",
+        "js-yaml": "4.1.1",
+        "log4js": "^6.9.1",
+        "@sentry/node": "^7.74.1",
         "reflect-metadata": "~0.1.13",
-        "typedi": "^0.8"
+        "typedi": "^0.10.0"
     },
     "devDependencies": {
-        "@types/bluebird": "^3.5.27",
-        "@types/config": "^0.0",
-        "@types/raven": "^2.5",
-        "config": "^3.1",
-        "js-yaml": "^3.13",
-        "log4js": "^6.2",
-        "raven": "^2.6",
+        "@sentry/node": "^7.74.1",
+        "@types/config": "^3.3.2",
+        "@types/node": "18.17.1",
+        "@typescript-eslint/eslint-plugin": "^8.53.1",
+        "@typescript-eslint/parser": "^8.53.1",
+        "config": "^3.3.9",
+        "eslint": "^9.39.2",
+        "eslint-plugin-import": "^2.32.0",
+        "eslint-plugin-jsdoc": "^49.0.0",
+        "eslint-plugin-prefer-arrow": "^1.2.3",
+        "js-yaml": "4.1.1",
+        "log4js": "^6.9.1",
         "reflect-metadata": "~0.1.13",
-        "tslint": "^5.18",
-        "typedi": "^0.8.0",
-        "typescript": "^3.5"
+        "typedi": "^0.10.0",
+        "typescript": "^5.2.2"
     },
-    "dependencies": {
-        "bluebird": "^3.5.5"
-    }
+    "dependencies": {}
 }
