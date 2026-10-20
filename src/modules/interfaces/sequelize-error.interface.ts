@@ -2,7 +2,7 @@ export interface SequelizeError {
     name: string;
     message: string;
     stack: string;
-    original: any;
-    parent: any;
+    original: Error;
+    parent: Error;
     sql: string;
 }

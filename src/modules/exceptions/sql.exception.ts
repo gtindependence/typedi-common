@@ -1,10 +1,10 @@
-import { BaseException } from './base.exception';
 import { SequelizeError } from '../interfaces';
+import { BaseException } from './base.exception';
 
 export class SqlException extends BaseException {
     message: string;
     stack: string;
-    error: any;
+    error: SequelizeError;
 
     constructor(error: SequelizeError) {
         super();
