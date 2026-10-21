@@ -9,6 +9,12 @@
     ],
     "main": "index.js",
     "typings": "index.d.ts",
+    "files": [
+        "index.js",
+        "index.d.ts",
+        "modules/**/*.js",
+        "modules/**/*.d.ts"
+    ],
     "author": "TeamHive, GTIndependence",
     "contributors": [
         "John Pinkster <jpinkster>",
@@ -24,39 +30,41 @@
         "url": "https://github.com/TeamHive/typedi-common/issues"
     },
     "scripts": {
+        "clean": "rm -f *.js && rm -f *.d.ts && rm -Rf modules",
         "test": "echo \"Error: no test specified\" && exit 1",
         "watch": "tsc -w",
-        "start": "tsc",
-        "prepack": "tsc",
+        "build": "npm run clean && tsc",
+        "prepack": "npm run lint && npm run build",
         "postpublish": "git push && git push --tags",
-        "postpack": "rm *.d.ts && rm *.js && rm -Rf modules",
-        "lint": "eslint -c .eslintrc.js --ext .ts src/*"
+        "postpack": "npm run clean",
+        "lint": "eslint src",
+        "lint:fix": "eslint src --fix",
+        "format": "prettier --check src"
     },
     "peerDependencies": {
+        "@sentry/node": "^11.8.0",
         "@types/config": "^3.3.2",
         "config": "^3.3.9",
-        "js-yaml": "4.1.1",
+        "js-yaml": "^4.3.2",
         "log4js": "^6.9.1",
-        "@sentry/node": "^7.74.1",
         "reflect-metadata": "~0.1.13",
         "typedi": "^0.10.0"
     },
     "devDependencies": {
-        "@sentry/node": "^7.74.1",
+        "@eslint/js": "^9.39.5",
+        "@sentry/node": "^11.8.0",
         "@types/config": "^3.3.2",
-        "@types/node": "18.17.1",
-        "@typescript-eslint/eslint-plugin": "^8.53.1",
-        "@typescript-eslint/parser": "^8.53.1",
+        "@types/node": "24.19.2",
         "config": "^3.3.9",
-        "eslint": "^9.39.2",
+        "eslint": "^9.39.5",
+        "eslint-config-prettier": "^10.1.8",
         "eslint-plugin-import": "^2.32.0",
-        "eslint-plugin-jsdoc": "^49.0.0",
-        "eslint-plugin-prefer-arrow": "^1.2.3",
-        "js-yaml": "4.1.1",
+        "js-yaml": "^4.3.2",
         "log4js": "^6.9.1",
+        "prettier": "^3.8.1",
         "reflect-metadata": "~0.1.13",
         "typedi": "^0.10.0",
-        "typescript": "^5.2.2"
-    },
-    "dependencies": {}
+        "typescript": "^5.2.2",
+        "typescript-eslint": "^8.56.1"
+    }
 }
