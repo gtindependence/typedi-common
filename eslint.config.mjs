@@ -1,6 +1,6 @@
 import js from '@eslint/js';
 import tseslint from 'typescript-eslint';
-import importPlugin from 'eslint-plugin-import';
+import importPlugin from 'eslint-plugin-import-x';
 import prettier from 'eslint-config-prettier';
 
 export default tseslint.config(
@@ -18,7 +18,7 @@ export default tseslint.config(
             },
         },
         plugins: {
-            import: importPlugin,
+            'import-x': importPlugin,
         },
         rules: {
             '@typescript-eslint/explicit-member-accessibility': 'off',
@@ -46,8 +46,8 @@ export default tseslint.config(
             'arrow-body-style': ['warn', 'as-needed'],
             curly: ['error', 'multi-line', 'consistent'],
             eqeqeq: ['error', 'always', { null: 'ignore' }],
-            'import/no-cycle': 'error',
-            'import/order': 'error',
+            'import-x/no-cycle': 'error',
+            'import-x/order': 'error',
             'max-len': ['warn', { code: 180 }],
             'no-fallthrough': 'error',
             'no-restricted-properties': [
