@@ -33,19 +33,21 @@
         "clean": "rm -f *.js && rm -f *.d.ts && rm -Rf modules",
         "test": "echo \"Error: no test specified\" && exit 1",
         "watch": "tsc -w",
-        "build": "npm run clean && tsc",
-        "prepack": "npm run lint && npm run build",
-        "postpublish": "git push && git push --tags",
-        "postpack": "npm run clean",
         "lint": "eslint src",
         "lint:fix": "eslint src --fix",
-        "format": "prettier --check src"
+        "format": "prettier --check src",
+        "build": "npm run clean && tsc",
+        "prepack": "npm run lint && npm run build",
+        "postpack": "npm run clean",
+        "postpublish": "git push && git push --tags",
+        "pack:dev": "npm pack",
+        "postpack:dev": "npm run build && mkdir -p ./build && mv ./*.tgz ./build && echo \"\nPack file path:\n$(pwd)/build/$(ls -tp ./build | grep -v '/$' | head -n 1)\n\""
     },
     "peerDependencies": {
         "@sentry/node": "^11.8.0",
         "@types/config": "^3.3.2",
         "config": "^3.3.9",
-        "js-yaml": "^4.3.2",
+        "js-yaml": "^5.4.3",
         "log4js": "^6.9.1",
         "reflect-metadata": "~0.1.13",
         "typedi": "^0.10.0"
@@ -59,13 +61,20 @@
         "eslint": "^10.13.0",
         "eslint-config-prettier": "^10.1.8",
         "eslint-import-resolver-node": "^0.4.0",
-        "eslint-plugin-import-x": "^4.17.1",
-        "js-yaml": "^4.3.2",
+        "eslint-plugin-import-x": "^4.18.1",
+        "js-yaml": "^5.4.3",
         "log4js": "^6.9.1",
         "prettier": "^3.8.1",
         "reflect-metadata": "~0.1.13",
         "typedi": "^0.10.0",
         "typescript": "^5.2.2",
         "typescript-eslint": "^8.72.0"
+    },
+    "overrides": {
+        "glob": "^14.0.3",
+        "minimatch": "^11.0.4"
+    },
+    "allowScripts": {
+        "unrs-resolver": false
     }
 }
