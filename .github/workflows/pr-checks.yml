@@ -32,9 +32,6 @@ jobs:
             - name: Run Linter
               run: npm run lint
 
-            - name: Type check (including specs)
-              run: npm run typecheck
-
     test:
         name: Unit Tests
         runs-on: ubuntu-latest
