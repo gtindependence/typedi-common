@@ -31,12 +31,12 @@
     },
     "scripts": {
         "clean": "rm -f *.js && rm -f *.d.ts && rm -Rf modules",
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "vitest run",
         "watch": "tsc -w",
         "lint": "eslint src",
         "lint:fix": "eslint src --fix",
         "format": "prettier --check src",
-        "build": "npm run clean && tsc",
+        "build": "npm run clean && tsc -p tsconfig.build.json",
         "prepack": "npm run lint && npm run build",
         "postpack": "npm run clean",
         "postpublish": "git push && git push --tags",
@@ -68,7 +68,8 @@
         "reflect-metadata": "~0.1.13",
         "typedi": "^0.10.0",
         "typescript": "^5.2.2",
-        "typescript-eslint": "^8.72.0"
+        "typescript-eslint": "^8.72.0",
+        "vitest": "^5.1.1"
     },
     "overrides": {
         "glob": "^14.0.3",
